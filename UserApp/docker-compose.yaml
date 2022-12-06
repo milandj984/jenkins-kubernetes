@@ -1,0 +1,16 @@
+version: '3'
+services:
+  dbServer:
+    container_name: dbServer
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=users
+
+  usersApp:
+    container_name: usersApp
+    image: milandj984/users-app:v1
+    ports:
+      - "80:80"
+    depends_on:
+     - dbServer
