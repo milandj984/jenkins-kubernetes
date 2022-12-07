@@ -10,19 +10,19 @@ pipeline {
         registry = "milandj984/users-app"
         registryCredential = 'dockerhub'
         
-        gitBranch = "master"
-        gitUrl = "https://github.com/milandj984/jenkins-kubernetes.git"
+//         gitBranch = "master"
+//         gitUrl = "https://github.com/milandj984/jenkins-kubernetes.git"
         
         imageTag = "v$BUILD_NUMBER"
     }
 
     stages {
         
-        stage('Fetch code') {
-            steps {
-                git branch: gitBranch, url: gitUrl
-            }
-        }
+//         stage('Fetch code') {
+//             steps {
+//                 git branch: gitBranch, url: gitUrl
+//             }
+//         }
         
         stage('Build') {
             steps {
