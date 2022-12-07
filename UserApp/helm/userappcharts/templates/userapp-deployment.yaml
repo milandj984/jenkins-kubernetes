@@ -1,0 +1,26 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userapp-deployment
+  labels:
+    app: userapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: userapp
+  template:
+    metadata:
+      labels:
+        app: userapp
+    spec:
+      containers:
+        - name: userapp
+          image: {{ .Values.imagename }}
+          ports:
+            - name: userapp-port
+              containerPort: 80
+      initContainers:
+        - name: init-db-service
+          image: busybox
+          command: [ 'sh', '-c', "until nslookup db-server.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for db-server; sleep 2; done" ]
