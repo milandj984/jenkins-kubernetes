@@ -114,7 +114,7 @@ pipeline {
         stage('Kubernetes Deploy') {
             agent {label 'KOPS'}
                 steps {
-                    sh "helm upgrade --install --force userapp-stack UserApp/helm/userappcharts --set imagename=${registry}:${imageTag} --namespace default"
+                    sh "helm upgrade --install --force userapp-stack /home/vagrant/jenkins-slave/workspace/users-app/UserApp/helm/userappcharts--set imagename=${registry}:${imageTag} --namespace default"
                 }
             }
         }
