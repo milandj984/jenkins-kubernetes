@@ -23,4 +23,4 @@ spec:
       initContainers:
         - name: init-db-service
           image: busybox
-          command: ['sh', '-c', 'until nslookup dbService; do echo waiting for dbService; sleep 2; done;']
+          command: ['sh', '-c', 'until nslookup db-server; do echo waiting for dbService; sleep 2; done;']
