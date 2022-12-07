@@ -108,7 +108,7 @@ pipeline {
             steps {
                 sh '''docker rmi $registry:$imageTag
                 docker rmi $registry:latest
-                docker image prune --filter label=stage=builder'''
+                docker image prune -f --filter label=stage=builder'''
             }
         }
 
