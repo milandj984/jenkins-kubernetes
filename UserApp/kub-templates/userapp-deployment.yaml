@@ -21,6 +21,6 @@ spec:
             - name: userapp-port
               containerPort: 80
       initContainers:
-        - name: init-dbService
+        - name: init-db-service
           image: busybox
           command: ['sh', '-c', 'until nslookup dbService; do echo waiting for dbService; sleep 2; done;']
