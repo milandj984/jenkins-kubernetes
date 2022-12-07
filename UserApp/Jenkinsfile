@@ -107,7 +107,8 @@ pipeline {
         stage('Remove Unused docker image') {
             steps {
                 sh '''docker rmi $registry:$imageTag
-                docker rmi $registry:latest'''
+                docker rmi $registry:latest
+                docker rmi --filter label=stage=builder'''
             }
         }
 
