@@ -1,0 +1,40 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  labels:
+    app: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres
+          ports:
+            - name: postgres-port
+              containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: users
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secrets
+                  key: db-pass
+          volumeMounts:
+            - name: data-mount
+              mountPath: /var/lib/postgresql/data
+      nodeSelector:
+        type: persistance
+      volumes:
+        - name: data-mount
+          hostPath:
+            path: /vagrant/persistance
+            type: DirectoryOrCreate
