@@ -24,7 +24,7 @@ pipeline {
 //             }
 //         }
         
-        stage('Build') {
+        stage('Dotnet Build') {
             steps {
                 sh '''cd UserApp
                 dotnet build -c Release'''
